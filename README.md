@@ -103,31 +103,53 @@ By storing JWTs in `httpOnly` cookies, the browser automatically attaches authen
 
 ## Visual Evidence
 
-### Login Page
-![Login Page](./doctor-portal-screenshot/login-page.png)
-*Secure authentication interface with httpOnly cookie session initialization.*
-
-### Dashboard Overview
-![Dashboard Desktop](./doctor-portal-screenshot/dashboard-desktop.png)
-*Desktop view of the clinical dashboard showing active staff KPIs, intaking trend charts, and specialization distributions.*
-
-![Dashboard Mobile](./doctor-portal-screenshot/dashboard-mobile.png)
-*Mobile view of the clinical dashboard with responsive KPI metrics and touch drawer navigation.*
-
-### Doctors Management
-![Doctors List Desktop](./doctor-portal-screenshot/doctor-page-list.png)
-*Desktop doctors registry featuring specialization filtering, search, and roster allocation.*
-
-![Doctors List Mobile](./doctor-portal-screenshot/doctor-route-mobile.png)
-*Mobile doctors view with compact doctor cards and stacked action buttons.*
-
-### Doctor Detail View
-![Doctor Detail View](./doctor-portal-screenshot/doctor-details-desktop.png)
-*Detailed profile page showing doctor credentials, hospital affiliation, and assigned patient roster.*
-
-### Patient Registry
-![Patients List Desktop](./doctor-portal-screenshot/patient-desktop.png)
-*Desktop patient registry with condition filtering, date range inputs, and zebra-striped table formatting.*
-
-![Patients List Mobile](./doctor-portal-screenshot/patient-route-mobile.png)
-*Mobile patient list showing responsive table overflow and stacked pagination controls.*
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <h3>🔑 Login Page</h3>
+      <img src="./doctor-portal-screenshot/login-page.png" alt="Login Page" width="100%" />
+      <p><em>Secure authentication interface with httpOnly cookie session.</em></p>
+    </td>
+    <td width="50%" align="center">
+      <h3>👨‍⚕️ Doctor Detail Profile</h3>
+      <img src="./doctor-portal-screenshot/doctor-details-desktop.png" alt="Doctor Detail View" width="100%" />
+      <p><em>Detailed profile page with assigned patient roster.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <h3>📊 Dashboard (Desktop)</h3>
+      <img src="./doctor-portal-screenshot/dashboard-desktop.png" alt="Dashboard Desktop" width="100%" />
+      <p><em>Clinical analytics, staff KPIs & intake trends.</em></p>
+    </td>
+    <td width="50%" align="center">
+      <h3>📱 Dashboard (Mobile)</h3>
+      <img src="./doctor-portal-screenshot/dashboard-mobile.png" alt="Dashboard Mobile" width="100%" />
+      <p><em>Responsive mobile view with touch navigation drawer.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <h3>🩺 Doctors Registry (Desktop)</h3>
+      <img src="./doctor-portal-screenshot/doctor-page-list.png" alt="Doctors List Desktop" width="100%" />
+      <p><em>Specialization filtering, search & staff management.</em></p>
+    </td>
+    <td width="50%" align="center">
+      <h3>📱 Doctors Registry (Mobile)</h3>
+      <img src="./doctor-portal-screenshot/doctor-route-mobile.png" alt="Doctors List Mobile" width="100%" />
+      <p><em>Mobile doctor cards with stacked action buttons.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <h3>📋 Patient Registry (Desktop)</h3>
+      <img src="./doctor-portal-screenshot/patient-desktop.png" alt="Patients List Desktop" width="100%" />
+      <p><em>Medical condition filtering & zebra-striped data table.</em></p>
+    </td>
+    <td width="50%" align="center">
+      <h3>📱 Patient Registry (Mobile)</h3>
+      <img src="./doctor-portal-screenshot/patient-route-mobile.png" alt="Patients List Mobile" width="100%" />
+      <p><em>Mobile responsive patient table & touch controls.</em></p>
+    </td>
+  </tr>
+</table>
