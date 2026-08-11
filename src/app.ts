@@ -13,6 +13,8 @@ import { ApiError } from './utils/apiResponse';
 
 const app: Application = express();
 
+app.set('trust proxy', 1);
+
 app.use(helmet());
 
 const defaultOrigins = [
