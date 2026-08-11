@@ -104,30 +104,30 @@ By storing JWTs in `httpOnly` cookies, the browser automatically attaches authen
 ## Visual Evidence
 
 ### Login Page
-![Login Page](./screenshots/login.png)
+![Login Page](./doctor-portal-screenshot/login-page.png)
 *Secure authentication interface with httpOnly cookie session initialization.*
 
 ### Dashboard Overview
-![Dashboard Desktop](./screenshots/dashboard-desktop.png)
+![Dashboard Desktop](./doctor-portal-screenshot/dashboard-desktop.png)
 *Desktop view of the clinical dashboard showing active staff KPIs, intaking trend charts, and specialization distributions.*
 
-![Dashboard Mobile](./screenshots/dashboard-mobile.png)
+![Dashboard Mobile](./doctor-portal-screenshot/dashboard-mobile.png)
 *Mobile view of the clinical dashboard with responsive KPI metrics and touch drawer navigation.*
 
 ### Doctors Management
-![Doctors List Desktop](./screenshots/doctors-list-desktop.png)
+![Doctors List Desktop](./doctor-portal-screenshot/doctor-page-list.png)
 *Desktop doctors registry featuring specialization filtering, search, and roster allocation.*
 
-![Doctors List Mobile](./screenshots/doctors-list-mobile.png)
+![Doctors List Mobile](./doctor-portal-screenshot/doctor-route-mobile.png)
 *Mobile doctors view with compact doctor cards and stacked action buttons.*
 
 ### Doctor Detail View
-![Doctor Detail View](./screenshots/doctor-detail.png)
+![Doctor Detail View](./doctor-portal-screenshot/doctor-details-desktop.png)
 *Detailed profile page showing doctor credentials, hospital affiliation, and assigned patient roster.*
 
 ### Patient Registry
-![Patients List Desktop](./screenshots/patients-list-desktop.png)
+![Patients List Desktop](./doctor-portal-screenshot/patient-desktop.png)
 *Desktop patient registry with condition filtering, date range inputs, and zebra-striped table formatting.*
 
-![Patients List Mobile](./screenshots/patients-list-mobile.png)
+![Patients List Mobile](./doctor-portal-screenshot/patient-route-mobile.png)
 *Mobile patient list showing responsive table overflow and stacked pagination controls.*
