@@ -6,3 +6,7 @@ dist
 .env
 .env.*
 !.env.example
+
+# Seed data script
+prisma/seed.ts
+prisma/seed.*
