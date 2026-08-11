@@ -52,10 +52,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
 
-// Health check endpoint
-app.get('/health', (_req: Request, res: Response) => {
+// Root and Health check endpoints
+app.get(['/', '/api', '/health'], (_req: Request, res: Response) => {
   res.status(200).json({
-    status: 'ok',
+    success: true,
+    message: 'Doctor Tracker API is working smoothly',
     environment: ENV.NODE_ENV,
     timestamp: new Date().toISOString(),
   });
