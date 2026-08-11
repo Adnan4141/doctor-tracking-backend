@@ -15,16 +15,28 @@ const app: Application = express();
 
 app.use(helmet());
 
-const allowedOrigins = ENV.CLIENT_URL
+const defaultOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3005',
+  'http://localhost:4000',
+  'http://localhost:4005',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:3005',
+  'http://127.0.0.1:4000',
+  'http://127.0.0.1:4005',
+];
+
+const configuredOrigins = ENV.CLIENT_URL
   ? ENV.CLIENT_URL.split(',').map((url) => url.trim())
-  : ['http://localhost:3000', 'http://127.0.0.1:3000'];
+  : [];
+
+const allowedOrigins = Array.from(new Set([...defaultOrigins, ...configuredOrigins]));
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow requests with no origin (like mobile apps, postman, or server-to-server)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
         return callback(null, true);
       }
       return callback(null, true);
