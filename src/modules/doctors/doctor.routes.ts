@@ -16,6 +16,7 @@ const router = Router();
 router.use(authenticate);
 
 router.get('/', asyncHandler(DoctorController.getAll));
+router.get('/specializations', asyncHandler(DoctorController.getSpecializations));
 router.post('/', validate(createDoctorSchema), asyncHandler(DoctorController.create));
 router.get('/:id', validate(doctorIdParamSchema), asyncHandler(DoctorController.getById));
 router.put('/:id', validate(updateDoctorSchema), asyncHandler(DoctorController.update));

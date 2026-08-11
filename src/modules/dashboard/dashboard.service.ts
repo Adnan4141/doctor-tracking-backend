@@ -2,12 +2,25 @@ import { prisma } from '../../prisma/client';
 
 export class DashboardService {
   static async getStats() {
-    const [totalDoctors, totalPatients] = await Promise.all([
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    thirtyDaysAgo.setHours(0, 0, 0, 0);
+
+    const [totalDoctors, totalPatients, newPatientsThisWeek, specializationsGroup] = await Promise.all([
       prisma.doctor.count(),
       prisma.patient.count(),
+      prisma.patient.count({
+        where: { createdAt: { gte: sevenDaysAgo } },
+      }),
+      prisma.doctor.groupBy({
+        by: ['specialization'],
+      }),
     ]);
 
-    // Aggregate patients count per doctor using Prisma groupBy
+    // Aggregate patients count per doctor
     const patientCountsByDoctor = await prisma.patient.groupBy({
       by: ['doctorId'],
       _count: { id: true },
@@ -31,11 +44,7 @@ export class DashboardService {
       };
     });
 
-    // Date-based trend: count of patients registered per day over last 30 days
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    thirtyDaysAgo.setHours(0, 0, 0, 0);
-
+    // Date-based 30-day trend
     const recentPatients = await prisma.patient.findMany({
       where: { createdAt: { gte: thirtyDaysAgo } },
       select: { createdAt: true },
@@ -62,10 +71,15 @@ export class DashboardService {
       count,
     }));
 
+    const avgPatientsPerDoctor = totalDoctors > 0 ? (totalPatients / totalDoctors).toFixed(1) : '0';
+
     return {
       totals: {
         totalDoctors,
         totalPatients,
+        newPatientsThisWeek,
+        totalSpecializations: specializationsGroup.length,
+        avgPatientsPerDoctor,
       },
       patientsPerDoctor,
       dateTrend,

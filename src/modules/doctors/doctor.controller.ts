@@ -8,6 +8,11 @@ export class DoctorController {
     sendSuccess(res, 200, 'Doctors retrieved successfully', doctors, meta);
   };
 
+  static getSpecializations = async (_req: Request, res: Response): Promise<void> => {
+    const specializations = await DoctorService.getSpecializations();
+    sendSuccess(res, 200, 'Specializations retrieved successfully', specializations);
+  };
+
   static getById = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     const doctor = await DoctorService.getById(id);

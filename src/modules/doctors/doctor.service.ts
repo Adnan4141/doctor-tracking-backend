@@ -41,6 +41,40 @@ export class DoctorService {
     };
   }
 
+  static async getSpecializations() {
+    const defaultSpecializations = [
+      'Cardiology',
+      'Neurology',
+      'Pediatrics',
+      'Orthopedics',
+      'Dermatology',
+      'General Surgery',
+      'Internal Medicine',
+      'Oncology',
+      'Psychiatry',
+      'Radiology',
+    ];
+
+    const grouped = await prisma.doctor.groupBy({
+      by: ['specialization'],
+      _count: { id: true },
+    });
+
+    const activeMap = new Map<string, number>();
+    grouped.forEach((g) => {
+      if (g.specialization) {
+        activeMap.set(g.specialization, g._count.id);
+      }
+    });
+
+    const allSet = new Set([...defaultSpecializations, ...activeMap.keys()]);
+
+    return Array.from(allSet).map((name) => ({
+      name,
+      doctorCount: activeMap.get(name) || 0,
+    }));
+  }
+
   static async getById(id: string) {
     const doctor = await prisma.doctor.findUnique({
       where: { id },
@@ -82,7 +116,6 @@ export class DoctorService {
 
   static async delete(id: string) {
     await this.getById(id);
-    // Delete doctor and cascading patients
     return prisma.$transaction([
       prisma.patient.deleteMany({ where: { doctorId: id } }),
       prisma.doctor.delete({ where: { id } }),
