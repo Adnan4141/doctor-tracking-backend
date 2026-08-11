@@ -8,5 +8,6 @@ export const ENV = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   DATABASE_URL: process.env.DATABASE_URL || '',
   JWT_SECRET: process.env.JWT_SECRET || 'doctor_tracker_super_secret_jwt_key_2026',
-  CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000',
+  CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3005',
+  COOKIE_DOMAIN: process.env.COOKIE_DOMAIN || undefined,
 };
