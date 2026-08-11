@@ -29,7 +29,7 @@ Prisma ORM requires a MongoDB replica set to support transactional operations an
 3. **Configure environment variables:**
    Create a `.env` file in the root of `doctor-tracker-backend`:
    ```env
-   PORT=5000
+   PORT=4005
    NODE_ENV=development
    DATABASE_URL="mongodb+srv://<username>:<password>@cluster.mongodb.net/doctor-tracking-portal?retryWrites=true&w=majority"
    JWT_SECRET="your_production_jwt_secret_key_minimum_32_characters"
@@ -46,7 +46,7 @@ Prisma ORM requires a MongoDB replica set to support transactional operations an
    ```bash
    npm run dev
    ```
-   The backend REST API will start on `http://localhost:5000` (or `https://api-doctor-tracking-portal.mhadnan.com` in production).
+   The backend REST API will start on `http://localhost:4005` (or `https://api-doctor-tracking-portal.mhadnan.com` in production).
 
 ---
 
