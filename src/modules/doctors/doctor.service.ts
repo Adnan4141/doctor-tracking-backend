@@ -75,6 +75,28 @@ export class DoctorService {
     }));
   }
 
+  static async updateSpecialization(oldName: string, newName: string) {
+    if (!oldName || !newName) {
+      throw new ApiError(400, 'Old and new specialization names are required');
+    }
+    const updated = await prisma.doctor.updateMany({
+      where: { specialization: { equals: oldName, mode: 'insensitive' } },
+      data: { specialization: newName },
+    });
+    return { updatedCount: updated.count, oldName, newName };
+  }
+
+  static async deleteSpecialization(name: string) {
+    if (!name) {
+      throw new ApiError(400, 'Specialization name is required');
+    }
+    const updated = await prisma.doctor.updateMany({
+      where: { specialization: { equals: name, mode: 'insensitive' } },
+      data: { specialization: 'General Practice' },
+    });
+    return { reassignedCount: updated.count, deletedName: name };
+  }
+
   static async getById(id: string) {
     const doctor = await prisma.doctor.findUnique({
       where: { id },

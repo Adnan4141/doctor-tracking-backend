@@ -13,6 +13,18 @@ export class DoctorController {
     sendSuccess(res, 200, 'Specializations retrieved successfully', specializations);
   };
 
+  static updateSpecialization = async (req: Request, res: Response): Promise<void> => {
+    const { oldName, newName } = req.body;
+    const result = await DoctorService.updateSpecialization(oldName, newName);
+    sendSuccess(res, 200, 'Specialization category updated successfully', result);
+  };
+
+  static deleteSpecialization = async (req: Request, res: Response): Promise<void> => {
+    const name = (req.query.name as string) || (req.body.name as string);
+    const result = await DoctorService.deleteSpecialization(name);
+    sendSuccess(res, 200, 'Specialization category deleted successfully', result);
+  };
+
   static getById = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     const doctor = await DoctorService.getById(id);
