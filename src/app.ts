@@ -14,20 +14,37 @@ import { ApiError } from './utils/apiResponse';
 const app: Application = express();
 
 app.use(helmet());
+
+const allowedOrigins = ENV.CLIENT_URL
+  ? ENV.CLIENT_URL.split(',').map((url) => url.trim())
+  : ['http://localhost:3000', 'http://127.0.0.1:3000'];
+
 app.use(
   cors({
-    origin: [ENV.CLIENT_URL, 'http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: (origin, callback) => {
+      // allow requests with no origin (like mobile apps, postman, or server-to-server)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
 
-// Health check
+// Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.status(200).json({
+    status: 'ok',
+    environment: ENV.NODE_ENV,
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // API Routes
