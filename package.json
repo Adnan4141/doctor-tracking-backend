@@ -4,7 +4,7 @@
   "description": "Doctor Tracker REST API Backend",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
@@ -34,6 +34,7 @@
     "@types/node": "^22.13.4",
     "prisma": "^6.3.1",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.23.12",
     "typescript": "^5.7.3"
   }
 }
