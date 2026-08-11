@@ -5,7 +5,6 @@ import { ENV } from '../../config/env.config';
 
 export class AuthController {
   
-  
   static login = async (req: Request, res: Response): Promise<void> => {
     const result = await AuthService.login(req.body);
 
@@ -13,19 +12,19 @@ export class AuthController {
     res.cookie('token', result.token, {
       httpOnly: true,
       secure: isProduction,
-      sameSite: 'lax',
+      sameSite: isProduction ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     sendSuccess(res, 200, 'Login successful', result.user, { token: result.token });
   };
 
-  
   static logout = async (_req: Request, res: Response): Promise<void> => {
+    const isProduction = ENV.NODE_ENV === 'production';
     res.clearCookie('token', {
       httpOnly: true,
-      secure: ENV.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
     });
     sendSuccess(res, 200, 'Logged out successfully');
   };
