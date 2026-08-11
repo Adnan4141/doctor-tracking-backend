@@ -20,29 +20,25 @@ export class DashboardService {
       }),
     ]);
 
-    // Aggregate patients count per doctor
+    // Fetch all doctors with their patient counts
+    const doctors = await prisma.doctor.findMany({
+      select: { id: true, name: true, specialization: true },
+      orderBy: { createdAt: 'asc' },
+    });
+
     const patientCountsByDoctor = await prisma.patient.groupBy({
       by: ['doctorId'],
       _count: { id: true },
     });
 
-    const doctorIds = patientCountsByDoctor.map((item) => item.doctorId);
-    const doctors = await prisma.doctor.findMany({
-      where: { id: { in: doctorIds } },
-      select: { id: true, name: true, specialization: true },
-    });
+    const countMap = new Map(patientCountsByDoctor.map((item) => [item.doctorId, item._count.id]));
 
-    const doctorMap = new Map(doctors.map((doc) => [doc.id, doc]));
-
-    const patientsPerDoctor = patientCountsByDoctor.map((item) => {
-      const doc = doctorMap.get(item.doctorId);
-      return {
-        doctorId: item.doctorId,
-        doctorName: doc ? doc.name : 'Unknown Doctor',
-        specialization: doc ? doc.specialization : 'General',
-        patientCount: item._count.id,
-      };
-    });
+    const patientsPerDoctor = doctors.map((doc) => ({
+      doctorId: doc.id,
+      doctorName: doc.name,
+      specialization: doc.specialization,
+      patientCount: countMap.get(doc.id) || 0,
+    }));
 
     // Date-based 30-day trend
     const recentPatients = await prisma.patient.findMany({
