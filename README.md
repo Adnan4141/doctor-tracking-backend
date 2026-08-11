@@ -3,8 +3,7 @@
 ## Description
 Doctor Tracker is a secure, high-performance administrative application engineered for healthcare providers and clinical administrators to streamline medical staff management and patient registry tracking. By centralizing doctor rosters, nested patient assignments, specialty categorization, and real-time clinical workload statistics into a unified web portal, Doctor Tracker replaces error-prone manual spreadsheets with an audit-ready, role-guarded platform. It delivers instant operational visibility into physician availability, patient intake trends, and department workloads across mobile, tablet, and desktop environments.
 
-- **Live Frontend Domain**: [https://doctor-tracking-portal.mhadnan.com](https://doctor-tracking-portal.mhadnan.com)
-- **Live Backend API Domain**: [https://api-doctor-tracking-portal.mhadnan.com](https://api-doctor-tracking-portal.mhadnan.com)
+- **Live Application Domain**: [https://doctor-tracking-portal.mhadnan.com](https://doctor-tracking-portal.mhadnan.com)
 
 ## Setup Guide
 
@@ -33,7 +32,7 @@ Prisma ORM requires a MongoDB replica set to support transactional operations an
    NODE_ENV=development
    DATABASE_URL="mongodb+srv://<username>:<password>@cluster.mongodb.net/doctor-tracking-portal?retryWrites=true&w=majority"
    JWT_SECRET="your_production_jwt_secret_key_minimum_32_characters"
-   CLIENT_URL="https://doctor-tracking-portal.mhadnan.com"
+   CLIENT_URL="http://localhost:3000"
    ```
 
 4. **Generate Prisma client and push schema:**
@@ -46,7 +45,7 @@ Prisma ORM requires a MongoDB replica set to support transactional operations an
    ```bash
    npm run dev
    ```
-   The backend REST API will start on `http://localhost:4005` (or `https://api-doctor-tracking-portal.mhadnan.com` in production).
+   The backend REST API will start on `http://localhost:4005`.
 
 ---
 
@@ -66,7 +65,7 @@ Prisma ORM requires a MongoDB replica set to support transactional operations an
 3. **Configure environment variables:**
    Create a `.env.local` file in the root of `doctor-tracker-frontend`:
    ```env
-   NEXT_PUBLIC_API_URL="https://api-doctor-tracking-portal.mhadnan.com/api"
+   NEXT_PUBLIC_API_URL="http://localhost:4005/api"
    ```
 
 4. **Run the frontend development server:**
